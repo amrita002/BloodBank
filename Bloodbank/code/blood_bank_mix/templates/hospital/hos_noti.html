@@ -1,0 +1,47 @@
+{% extends 'hospital/hos_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block hos_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block hos_body %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="container">
+                      <h2>Hospital Blood Request</h2>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                              <th>ID</th>
+                              <th>Mail Id</th>
+                              <th>Blood Group</th>
+                              <th>No of Units</th>
+                              <th>Blood Bank</th>
+                              <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for x in bsobj %}
+                            {% if x.mail == user_mail %}
+                                <tr>
+                                    <td>{{ x.id }}</td>
+                                    <td>{{ x.mail }}</td>
+                                    <td>{{ x.group }}</td>
+                                    <td>{{ x.units }}</td>
+                                    <td>{{ x.bank_name }}</td>
+                                    <td>{{ x.status }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'donor/donor_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block donor_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block donor_body %}
+         <div class="container">
+        <h2>Update Profile</h2>
+            <h2>{{ mess }}</h2>
+            <form action="{% url 'donorprofile' %}" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Username: </label>
+                    <input type="text" name="user_name" value="{{ ureg.user_name }}" id="user_name" maxlength="20" class="form-control" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address: </label>
+                    <input type="email" value="{{ ureg.user_mail }}" class="form-control" name="user_mail"  disabled="disabled"/>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password: </label>
+                    <input type="password" value="{{ ureg.user_pass }}" name="user_pass" class="form-control" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Phone Number: </label>
+                    <input type="text" value="{{ ureg.user_phone_number }}" name="user_phone_number" maxlength="10" class="form-control" required/>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Location: </label><br />
+                    <input type="text" value="{{ ureg.user_address }}" name="user_address" id="user_address" maxlength="30" class="form-control" required/>
+                </div>
+                <input type="submit" value="Update" class='btn btn-info'/>
+            </form>
+        </div>
+    {% endblock %}
+</body>
+</html>

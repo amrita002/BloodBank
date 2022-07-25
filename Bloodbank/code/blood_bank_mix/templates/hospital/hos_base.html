@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    {% block hos_head %}
+    {% endblock %}
+
+</head>
+<body>
+
+            <nav class="navbar navbar-inverse">
+                  <div class="container-fluid">
+                    <div class="navbar-header">
+                      <a class="navbar-brand" href="{% url 'index' %}">Blood Bank</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'hosdisplayblood' %}">Blood Available</a></li>
+                        <li><a href="{% url 'hosseek' %}">Seek Blood</a></li>
+                        <li><a href="{% url 'hosdonreport' %}">Donor Info</a></li>
+                        <li><a href="{% url 'hosnoti' %}">Notifications</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                    </ul>
+                  </div>
+            </nav>
+
+    {% block hos_body %}
+    {% endblock %}
+
+</body>
+</html>

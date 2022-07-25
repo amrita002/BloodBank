@@ -1,0 +1,67 @@
+{% extends 'donor/donor_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block donor_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block donor_body %}
+        <div class="container">
+            <div class="row"><div class="col-sm-12"><h2>Welcome {{ uobj.user_name }}</h2></div></div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    {% for u in ureg %}
+                        {% if u.user_role == 'bank' %}
+                            <h2>{{ u.user_name }} Blood Bank: </h2>
+                            <table class="table table-bordered" style="text-align: center">
+                                {% for x in bval %}
+                                    {% if x.bank_name == u.user_name %}
+                                        <tr>
+                                            <th>A +ve</th>
+                                            <td>{{ x.a_positive }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>B +ve</th>
+                                            <td>{{ x.b_positive }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>AB +ve</th>
+                                            <td>{{ x.ab_positive }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>O +ve</th>
+                                            <td>{{ x.o_positive }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>A -ve</th>
+                                            <td>{{ x.a_negative }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>B -ve</th>
+                                            <td>{{ x.b_negative }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>AB -ve</th>
+                                            <td>{{ x.ab_negative }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>O -ve</th>
+                                            <td>{{ x.o_negative }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+
+                      </table>
+                            <br /><hr />
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

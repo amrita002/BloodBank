@@ -1,0 +1,76 @@
+{% extends 'donor/donor_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block donor_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block donor_body %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered">
+                    <h2>Blood Donate Request</h2>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mail</th>
+                                <th>Blood Group</th>
+                                <th>Blood Units</th>
+                                <th>Blood Bank</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in bobj %}
+                                {% if x.mail == user_mail %}
+                                    <tr>
+                                        <td>{{ x.id }}</td>
+                                        <td>{{ x.mail }}</td>
+                                        <td>{{ x.group }}</td>
+                                        <td>{{ x.units }}</td>
+                                        <td>{{ x.bank_name }}</td>
+                                        <td>{{ x.status }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <table class="table table-bordered">
+                    <h2>Blood Seeker Request</h2>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mail</th>
+                                <th>Blood Group</th>
+                                <th>Blood Units</th>
+                                <th>Blood Bank</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for x in bsobj %}
+                                {% if x.mail == user_mail %}
+                                    <tr>
+                                        <td>{{ x.id }}</td>
+                                        <td>{{ x.mail }}</td>
+                                        <td>{{ x.group }}</td>
+                                        <td>{{ x.units }}</td>
+                                        <td>{{ x.bank_name }}</td>
+                                        <td>{{ x.status }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

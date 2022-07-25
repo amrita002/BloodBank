@@ -1,0 +1,80 @@
+{% extends 'bank/bank_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block bank_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block bank_body %}
+        <div class="container">
+        <div class="row"><div class="col-sm-12" style="text-align: center"><h2>Seeker Request Accepted/Rejected</h2><h2 style="color: #1c7430">{{ mess }}</h2></div></div>
+            {% if dis == 'y' %}
+                <div class="row">
+                    <div class="col-sm-12">
+                            <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                              <th>Request Id</th>
+                              <th>User mail</th>
+                            <th>Blood Group</th>
+                            <th>No of Units</th>
+                            <th>blood bank</th>
+                              <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for x in bsobj %}
+                            {% if x.status == 'not yet approved' %}
+                                {% if x.role != 'hospital' and x.bank_name == user_name %}
+                                <tr>
+                                    <td>{{ x.id }}</td>
+                                    <td>{{ x.mail }}</td>
+                                    <td>{{ x.group }}</td>
+                                    <td>{{ x.units }}</td>
+                                    <td>{{ x.bank_name }}</td>
+                                    <td>{{ x.status }}</td>
+                                {% endif %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="col-sm-12">
+                    <form action="{% url 'bankseekreq' %}" method="POST">{% csrf_token %}
+
+                                <div class="form-group">
+                            <label>Select Request id</label>
+                            <select name='selopt' class="form-control">
+                                {% for x in bsobj %}
+                                    {% if x.status == 'not yet approved' %}
+                                        {% if x.role != 'hospital' and x.bank_name == user_name %}
+                                                <option value="{{ x.id }}">{{ x.id }}</option>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select Accept / Reject</label>
+                            <select name="vstat" class="form-control">
+                                <option value="Accepted"> Accept </option>
+                                <option value="Rejected"> Reject </option>
+                            </select>
+                        </div>
+                        <input type="submit" class="btn btn-success" value="approval"/>
+
+                            </form>
+                </div>
+            </div>
+            {% else %}
+                <h2>No request found...</h2>
+            {% endif %}
+        </div>
+    {% endblock %}
+</body>
+</html>

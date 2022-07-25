@@ -1,0 +1,78 @@
+{% extends 'bank/bank_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block bank_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block bank_body %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div style="text-align: center"><h1>Create Sub Branch...</h1></div>
+                    <h1 style="color: #1c7430">{{ mess }}</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+
+                <div class="col-sm-4">
+
+                    <br />
+                    <form name="regform" action="{% url 'bankaddbranches' %}" method="POST">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Main branch name: </label>
+                            <input disabled value="{{ uobj.user_main_branch_name }}" type="text" name="user_main" id="user_main" maxlength="20" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Sub Branch Locality: </label><br />
+                            <select class="form-control" name="user_address">
+                                <option value="ameerpet">Ameerpet</option>
+                                <option value="bahadurpura">Bahadurpura</option>
+                                <option value="banjara hills">Banjara hills</option>
+                                <option value="chandanagar">Chandanagar</option>
+                                <option value="charminar">Charminar</option>
+                                <option value="golkonda">Golkonda</option>
+                                <option value="jubilee hills">Jubilee hills</option>
+                                <option value="kapra">Kapra</option>
+                                <option value="khairatabad">Khairatabad</option>
+                                <option value="kukatpally">Kukatpally</option>
+                                <option value="koti">Koti</option>
+                                <option value="malkajgiri">Malkajgiri</option>
+                                <option value="miyapur">Miyapur</option>
+                                <option value="nampally">Nampally</option>
+                                <option value="patancheru">Patancheru</option>
+                                <option value="quthbullapur">Quthbullapur</option>
+                                <option value="secunderabad">Secunderabad</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email address: </label>
+                            <input type="email" class="form-control" name="user_mail" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password: </label>
+                            <input type="password" name="user_pass" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password Again: </label>
+                            <input type="password" name="user_pass1" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Phone Number: </label>
+                            <input type="num" name="user_phone_number" maxlength="10" class="form-control" required/>
+                        </div>
+
+
+                        <input type="submit" class="btn btn-success" value="Register branch" />
+                    </form>
+                </div>
+
+                <div class="col-sm-4"></div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

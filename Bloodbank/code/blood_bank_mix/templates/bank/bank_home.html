@@ -1,0 +1,95 @@
+{% extends 'bank/bank_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block bank_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block bank_body %}
+        <div class="container">
+            <div class="row">
+            <div class="col-sm-12">
+                <h2>Welcome to {{ bdloc }} Blood Bank</h2>
+                <h2>{{ mess }}</h2>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                      <h3>Blood Available</h3>
+                      <table class="table table-bordered" style="text-align: center">
+
+                        {% for x in bobj %}
+                            {% if x.mail == user_mail %}
+                                <tr>
+                                    <th>A +ve</th>
+                                    <td>{{ x.a_positive }}</td>
+                                </tr>
+                                <tr>
+                                    <th>B +ve</th>
+                                    <td>{{ x.b_positive }}</td>
+                                </tr>
+                                <tr>
+                                    <th>AB +ve</th>
+                                    <td>{{ x.ab_positive }}</td>
+                                </tr>
+                                <tr>
+                                    <th>O +ve</th>
+                                    <td>{{ x.o_positive }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>A -ve</th>
+                                    <td>{{ x.a_negative }}</td>
+                                </tr>
+                                <tr>
+                                    <th>B -ve</th>
+                                    <td>{{ x.b_negative }}</td>
+                                </tr>
+                                <tr>
+                                    <th>AB -ve</th>
+                                    <td>{{ x.ab_negative }}</td>
+                                </tr>
+                                <tr>
+                                    <th>O -ve</th>
+                                    <td>{{ x.o_negative }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+
+                      </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Add Blood</h3>
+                    <form class="form-inline" action="{% url 'bankhome' %}" method="POST">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="group">Select Blood Group:</label>
+                            <select class="form-control" name="group">
+                                <option value="a+">A +ve</option>
+                                <option value="a-">A -ve</option>
+
+                                <option value="b+">B +ve</option>
+                                <option value="b-">B -ve</option>
+
+                                <option value="ab+">AB +ve</option>
+                                <option value="ab-">AB -ve</option>
+
+                                <option value="o+">O +ve</option>
+                                <option value="o-">O -ve</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="integer">Enter Units:</label>
+                            <input type="number" min="1" class="form-control" name="units" required/>
+                          </div>
+                        <input type="submit" value="Add Blood" class="btn btn-success" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

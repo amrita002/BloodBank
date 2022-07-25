@@ -1,0 +1,66 @@
+{% extends 'bank/bank_base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block bank_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block bank_body %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div><h2>Branches in {{ uobj.user_main_branch_name }}</h2></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        {% for x in bbobj %}
+                            {% if x.bank_name != x.user_main_branch_name %}
+                                <h2>{{ x.bank_name }}</h2>
+                                <table class="table table-bordered" style="text-align: center">
+                                    <tr>
+                                    <th>A +ve</th>
+                                    <td>{{ x.a_positive }}</td>
+                                    </tr>
+                                <tr>
+                                    <th>B +ve</th>
+                                    <td>{{ x.b_positive }}</td>
+                                </tr>
+                                <tr>
+                                    <th>AB +ve</th>
+                                    <td>{{ x.ab_positive }}</td>
+                                </tr>
+                                <tr>
+                                    <th>O +ve</th>
+                                    <td>{{ x.o_positive }}</td>
+                                </tr>
+
+                                <tr>
+                                    <th>A -ve</th>
+                                    <td>{{ x.a_negative }}</td>
+                                </tr>
+                                <tr>
+                                    <th>B -ve</th>
+                                    <td>{{ x.b_negative }}</td>
+                                </tr>
+                                <tr>
+                                    <th>AB -ve</th>
+                                    <td>{{ x.ab_negative }}</td>
+                                </tr>
+                                <tr>
+                                    <th>O -ve</th>
+                                    <td>{{ x.o_negative }}</td>
+                                </tr>
+
+
+                      </table>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/myjs/sample.js' %}"></script>
+
+    {% block base_head %}
+    {% endblock %}
+
+</head>
+<body>
+
+            <nav class="navbar navbar-inverse">
+                  <div class="container-fluid">
+                    <div class="navbar-header">
+                      <a class="navbar-brand" href="{% url 'index' %}">Blood Bank</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                      <li><a href="{% url 'reg' %}"><span class="glyphicon glyphicon-log-in"></span> Sign Up</a></li>
+                    </ul>
+                  </div>
+            </nav>
+
+    {% block base_body %}
+    {% endblock %}
+
+</body>
+</html>

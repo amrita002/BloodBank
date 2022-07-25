@@ -1,0 +1,93 @@
+{% extends 'bank/bank_base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block bank_head %}
+    {% endblock %}
+</head>
+<body>
+    {% block bank_body %}
+        <div class="container-fluid">
+        <h2 style="text-align: center">Donor Request Accepted / Rejected</h2>
+        {% if dis == 'y' %}
+            <div class="row">
+                <div class="col-sm-12">
+
+                        <h2 style="color: #1c7430">{{ mess }}</h2>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                              <th>Request Id</th>
+                              <th>User mail</th>
+                              <th>Age</th>
+                              <th>Blood Group</th>
+                              <th>No of Units</th>
+                              <th>User Location</th>
+                              <th>BP</th>
+                              <th>Diabetes</th>
+                              <th>Physical Disorder</th>
+                              <th>Disease</th>
+                              <th>Status</th>
+                              <th>Appointment Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for x in bobj %}
+                            {% if x.status == 'not yet approved' and x.bank_name == uobj.user_name %}
+                          <tr>
+                              <td>{{ x.id }}</td>
+                              <td>{{ x.mail }}</td>
+                              <td>{{ x.age }}</td>
+                              <td>{{ x.group }}</td>
+                              <td>{{ x.units }}</td>
+                              <td>{{ x.user_location }}</td>
+                              <td>{{ x.bp }}</td>
+                              <td>{{ x.diabetes }}</td>
+                              <td>{{ x.physical_disorders }}</td>
+                              <td>{{ x.diease }}</td>
+                              <td>{{ x.status }}</td>
+                              <td>{{ x.date }}</td>
+
+                          </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-2">
+                        <form action="{% url 'bankdonreq' %}" method="POST">{% csrf_token %}
+
+                            <div class="form-group">
+                        <label>Select Request id</label>
+                        <select name='selopt' class="form-control">
+                            {% for x in bobj %}
+                                {% if x.status == 'not yet approved' and x.bank_name == uobj.user_name %}
+                                <option value="{{ x.id }}">{{ x.id }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Accept / Reject</label>
+                        <select name="vstat" class="form-control">
+                            <option value="Accepted"> Accept </option>
+                            <option value="Rejected"> Reject </option>
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="approval"/>
+
+                        </form>
+                    </div>
+            </div>
+        {% else %}
+            <h2>No records found</h2>
+        {% endif %}
+        </div>
+    {% endblock %}
+</body>
+</html>
